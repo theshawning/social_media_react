@@ -8,7 +8,7 @@ import Axios from 'axios';
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      const response = await Axios.post('http://localhost:8080/login', {
+      const response = await Axios.post('/login', {
         username,
         password
       })
