@@ -14,6 +14,7 @@ import CreatePost from './components/CreatePost';
 import ViewSinglePost from './components/ViewSinglePost';
 import FlashMessages from './components/FlashMessages';
 
+
 function App() {
   const [loggedIn, setLoggedIn] = useState(Boolean(localStorage.getItem('complexAppToken')));
   const [flashMessages, setFlashMessages] = useState([]);
