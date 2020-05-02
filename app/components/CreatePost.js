@@ -3,7 +3,7 @@ import Page from './Page'
 import Axios from 'axios'
 import { Redirect } from 'react-router-dom'
 
-function CreatePost() {
+function CreatePost(props) {
   const [title, setTitle] = useState();
   const [body, setBody] = useState();
   const [wasSuccessful, setWasSuccessful] = useState(false);
@@ -24,6 +24,7 @@ function CreatePost() {
   }
 
   if (wasSuccessful) {
+    props.addFlashMessage('Congrats, you succesfully created a post!')
     return <Redirect to={`/post/${wasSuccessful}`} />
   }
 

@@ -11,20 +11,29 @@ import Footer from './components/Footer';
 import About from './components/About';
 import Terms from './components/Terms';
 import CreatePost from './components/CreatePost';
-import ViewSinglePost from './components/ViewSinglePost'
+import ViewSinglePost from './components/ViewSinglePost';
+import FlashMessages from './components/FlashMessages';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(Boolean(localStorage.getItem('complexAppToken')));
+  const [flashMessages, setFlashMessages] = useState([]);
+
+  function addFlashMessage(msg) {
+    setFlashMessages(prev => prev.concat(msg))
+  }
 
   return (
     <BrowserRouter>
+      <FlashMessages messages={flashMessages} />
       <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
       <Switch>
         <Route path='/' exact>
           {loggedIn ? <Home /> : <HomeGuest /> }
         </Route>
         <Route path='/post/:id'><ViewSinglePost /></Route>
-        <Route path='/create-post'><CreatePost /></Route>
+        <Route path='/create-post'>
+          <CreatePost addFlashMessage={addFlashMessage} />
+        </Route>
         <Route path='/about-us' exact><About /></Route>
         <Route path='/terms' exact><Terms /></Route>
       </Switch>
