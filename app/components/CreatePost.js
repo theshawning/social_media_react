@@ -3,12 +3,14 @@ import Page from './Page'
 import Axios from 'axios'
 import { Redirect } from 'react-router-dom'
 import DispatchContext from '../DispatchContext'
+import StateContext from '../StateContext'
 
 function CreatePost(props) {
   const [title, setTitle] = useState();
   const [body, setBody] = useState();
   const [wasSuccessful, setWasSuccessful] = useState(false);
   const appDispatch = useContext(DispatchContext);
+  const appState = useContext(StateContext);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -16,7 +18,7 @@ function CreatePost(props) {
       const response = await Axios.post('/create-post', {
         title,
         body,
-        token: localStorage.getItem('complexAppToken')
+        token: appState.user.token
       });
       console.log('new post created');
       setWasSuccessful(response.data);
